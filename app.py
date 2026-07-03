@@ -246,61 +246,69 @@ with gr.Blocks(theme=theme, css=CSS, title="PomologyAI — Date Fruit Classifier
     gr.HTML(HEADER)
 
     with gr.Row(equal_height=False):
-
-        # ── Left: inputs (2/3 width) ──
         with gr.Column(scale=2):
 
-            gr.HTML('<div class="eyebrow">Shape & Geometry</div>')
+            gr.HTML('<div class="eyebrow">Shape &amp; Geometry</div>')
             with gr.Row():
-                inputs[0];  inputs[1];  inputs[2];  inputs[3]
+                gr.Slider(minimum=0,      maximum=200000, value=80000,  label="AREA [mm²]",         step=200)
+                gr.Slider(minimum=0,      maximum=2500,   value=900,    label="PERIMETER [mm]",      step=2.5)
+                gr.Slider(minimum=0,      maximum=700,    value=250,    label="MAJOR_AXIS [mm]",     step=0.7)
+                gr.Slider(minimum=0,      maximum=500,    value=180,    label="MINOR_AXIS [mm]",     step=0.5)
             with gr.Row():
-                inputs[4];  inputs[5];  inputs[6];  inputs[7]
+                gr.Slider(minimum=0.0,    maximum=1.0,    value=0.7,    label="ECCENTRICITY",        step=0.001)
+                gr.Slider(minimum=0,      maximum=700,    value=300,    label="EQDIASQ [mm]",        step=0.7)
+                gr.Slider(minimum=0.0,    maximum=1.0,    value=0.99,   label="SOLIDITY",            step=0.001)
+                gr.Slider(minimum=0,      maximum=210000, value=82000,  label="CONVEX_AREA [mm²]",   step=210)
             with gr.Row():
-                inputs[8];  inputs[9];  inputs[10]; inputs[11]
+                gr.Slider(minimum=0.0,    maximum=1.0,    value=0.75,   label="EXTENT",              step=0.001)
+                gr.Slider(minimum=0.0,    maximum=5.0,    value=1.4,    label="ASPECT_RATIO",        step=0.005)
+                gr.Slider(minimum=0.0,    maximum=1.0,    value=0.75,   label="ROUNDNESS",           step=0.001)
+                gr.Slider(minimum=0.0,    maximum=1.0,    value=0.85,   label="COMPACTNESS",         step=0.001)
             with gr.Row():
-                inputs[12]; inputs[13]; inputs[14]; inputs[15]
+                gr.Slider(minimum=0.0,    maximum=0.01,   value=0.003,  label="SHAPEFACTOR_1",       step=0.00001)
+                gr.Slider(minimum=0.0,    maximum=0.01,   value=0.002,  label="SHAPEFACTOR_2",       step=0.00001)
+                gr.Slider(minimum=0.0,    maximum=1.0,    value=0.6,    label="SHAPEFACTOR_3",       step=0.001)
+                gr.Slider(minimum=0.0,    maximum=1.0,    value=0.98,   label="SHAPEFACTOR_4",       step=0.001)
 
             gr.HTML('<div class="eyebrow">Colour Statistics — R / G / B</div>')
             with gr.Row():
-                inputs[16]; inputs[17]; inputs[18]
+                gr.Slider(minimum=0, maximum=255, value=120, label="MeanRR [0-255]",   step=0.255)
+                gr.Slider(minimum=0, maximum=255, value=100, label="MeanRG [0-255]",   step=0.255)
+                gr.Slider(minimum=0, maximum=255, value=80,  label="MeanRB [0-255]",   step=0.255)
             with gr.Row():
-                inputs[19]; inputs[20]; inputs[21]
+                gr.Slider(minimum=0, maximum=80,  value=20,  label="StdDevRR",         step=0.08)
+                gr.Slider(minimum=0, maximum=80,  value=18,  label="StdDevRG",         step=0.08)
+                gr.Slider(minimum=0, maximum=80,  value=15,  label="StdDevRB",         step=0.08)
             with gr.Row():
-                inputs[22]; inputs[23]; inputs[24]
+                gr.Slider(minimum=-5, maximum=5,  value=0.5, label="SkewRR",           step=0.01)
+                gr.Slider(minimum=-5, maximum=5,  value=0.3, label="SkewRG",           step=0.01)
+                gr.Slider(minimum=-5, maximum=5,  value=0.2, label="SkewRB",           step=0.01)
             with gr.Row():
-                inputs[25]; inputs[26]; inputs[27]
+                gr.Slider(minimum=-3, maximum=10, value=1.0, label="KurtosisRR",       step=0.013)
+                gr.Slider(minimum=-3, maximum=10, value=0.8, label="KurtosisRG",       step=0.013)
+                gr.Slider(minimum=-3, maximum=10, value=0.6, label="KurtosisRB",       step=0.013)
             with gr.Row():
-                inputs[28]; inputs[29]; inputs[30]
+                gr.Slider(minimum=0, maximum=8,   value=5.5, label="EntropyRR",        step=0.008)
+                gr.Slider(minimum=0, maximum=8,   value=5.2, label="EntropyRG",        step=0.008)
+                gr.Slider(minimum=0, maximum=8,   value=4.8, label="EntropyRB",        step=0.008)
 
             gr.HTML('<div class="eyebrow">Wavelet Descriptors (Daub4)</div>')
             with gr.Row():
-                inputs[31]; inputs[32]; inputs[33]
+                gr.Slider(minimum=0, maximum=20, value=7.0, label="ALLdaub4RR",        step=0.02)
+                gr.Slider(minimum=0, maximum=20, value=6.0, label="ALLdaub4RG",        step=0.02)
+                gr.Slider(minimum=0, maximum=20, value=5.0, label="ALLdaub4RB",        step=0.02)
 
-            btn = gr.Button(
-                "🔍  Classify Variety",
-                variant="primary",
-                elem_classes=["predict-btn"],
-            )
+            btn = gr.Button("🔍  Classify Variety", variant="primary", elem_classes=["predict-btn"])
 
-        # ── Right: output panel (1/3 width) ──
         with gr.Column(scale=1):
             gr.HTML('<div class="eyebrow">Prediction</div>')
-            output = gr.Label(
-                num_top_classes=7,
-                label="Date Fruit Variety · Confidence",
-            )
-            gr.Markdown(
-                """
-                **7 Varieties**
-                BERHI · DEGLET · DOKOL
-                IRAQI · ROTAB · SAFAWI · SOGAY
-                """,
-                container=False,
-            )
+            output = gr.Label(num_top_classes=7, label="Date Fruit Variety · Confidence")
+            gr.Markdown("**7 Varieties**\n\nBERHI · DEGLET · DOKOL\nIRAQI · ROTAB · SAFAWI · SOGAY", container=False)
 
-    btn.click(fn=predict, inputs=inputs, outputs=output)
-
+    btn.click(fn=predict, inputs=btn, outputs=output)  # ← wrong, see below
     gr.HTML(FOOTER)
+
+    
 
 if __name__ == "__main__":
     demo.launch()
