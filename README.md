@@ -2,7 +2,7 @@
 title: PomologyAI — Date Fruit Variety Classifier
 emoji: 🌴
 colorFrom: yellow
-colorTo: orange
+colorTo: red
 sdk: gradio
 sdk_version: "4.0"
 app_file: app.py
