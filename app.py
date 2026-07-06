@@ -236,7 +236,7 @@ FOOTER = """
   Built by <strong>Karthika Krishna M</strong> &nbsp;·&nbsp;
   ANN: Linear(34→64→64→7) &nbsp;·&nbsp;
   Trained on DateFruit Dataset &nbsp;·&nbsp;
-  Anna University, Tirunelveli
+  
 </div>
 """
 
@@ -298,7 +298,7 @@ with gr.Blocks(theme=theme, css=CSS, title="PomologyAI — Date Fruit Classifier
                 gr.Slider(minimum=0, maximum=20, value=6.0, label="ALLdaub4RG",        step=0.02)
                 gr.Slider(minimum=0, maximum=20, value=5.0, label="ALLdaub4RB",        step=0.02)
 
-            btn = gr.Button("🔍  Classify Variety", variant="primary", elem_classes=["predict-btn"])
+            btn = gr.Button("Classify Variety", variant="primary", elem_classes=["predict-btn"])
 
         with gr.Column(scale=1):
             gr.HTML('<div class="eyebrow">Prediction</div>')
