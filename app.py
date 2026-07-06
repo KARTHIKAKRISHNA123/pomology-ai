@@ -305,7 +305,10 @@ with gr.Blocks(theme=theme, css=CSS, title="PomologyAI — Date Fruit Classifier
             output = gr.Label(num_top_classes=7, label="Date Fruit Variety · Confidence")
             gr.Markdown("**7 Varieties**\n\nBERHI · DEGLET · DOKOL\nIRAQI · ROTAB · SAFAWI · SOGAY", container=False)
 
-    btn.click(fn=predict, inputs=btn, outputs=output)  # ← wrong, see below
+    all_sliders = [c for c in demo.blocks.values() if isinstance(c, gr.Slider)]
+    # demo.blocks preserves insertion order (Python 3.7+), so sliders are
+    # in the exact order they were created: shape[0..15], colour[16..30], wavelet[31..33]
+    btn.click(fn=predict, inputs=all_sliders, outputs=output)
     gr.HTML(FOOTER)
 
     
