@@ -1,22 +1,3 @@
----
-title: PomologyAI — Date Fruit Variety Classifier
-emoji: 🌴
-colorFrom: yellow
-colorTo: red
-sdk: gradio
-sdk_version: "5.9.1"
-app_file: app.py
-pinned: true
-license: mit
-tags:
-  - pytorch
-  - classification
-  - computer-vision
-  - gradio
-  - ann
-  - date-fruit
-  - deep-learning
----
 
 <div align="center">
 
